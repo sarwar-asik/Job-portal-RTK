@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import Main from "../layout/Main";
+import Home from "../layout/Home";
+import Main from "../layout/main/Main";
+
 
 
 const routes = createBrowserRouter([
@@ -9,7 +11,7 @@ const routes = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>asdfa</h1>,
+        element: <Home/>,
       },
       
     ],
