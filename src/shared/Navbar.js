@@ -37,7 +37,7 @@ const Navbar = () => {
           <div className="mx-auto container px-6 py-2 xl:py-0">
             <div className="flex items-center justify-between w-full">
               {/* lg ---start */}
-              <div className="">
+              <div className="py-3">
                 <Link to="/" className="">
                   <h2 className="hidden sm:block text-3xl font-bold leading-normal pl-3">
                     JOB PORTAL
@@ -76,7 +76,7 @@ const Navbar = () => {
             </Link>
 
             {/* sm-----menubar */}
-            <div className="flex items-center  p-2 ">
+            <div className="flex items-center   ">
               <div
                 id="menu"
                 className="text-gray-500 bg-primary"
