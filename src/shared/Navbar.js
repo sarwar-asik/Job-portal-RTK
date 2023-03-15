@@ -51,7 +51,7 @@ const Navbar = () => {
               </div>
               {/* lg ----- items ----- */}
               <div className="flex">
-                <div className="hidden xl:flex items-center gap-2 md:mr-6 xl:mr-16 ">
+                <div className="hidden xl:flex  items-center gap-2 md:mr-6 xl:mr-16 ">
                   {MenuItem}
                 </div>
                 {/* lg------end-section ------- */}
@@ -126,20 +126,20 @@ const Navbar = () => {
               className=" opacity-50 w-full h-full"
               onClick={() => setShow(!show)}
             />
-            <div className="w-64 z-40 fixed overflow-y-auto top-0 shadow-2xl h-[100%] flex-col justify-between xl:hidden pb-4 transition duration-150 ease-in-out bg-slate-300  ">
+            <div className="w-64 z-40 fixed overflow-y-auto top-0 shadow-2xl flex-col justify-between xl:hidden pb-4 transition duration-150 ease-in-out bg-slate-300 h-full">
               <div className="px-6 h-full">
                 <div className="flex flex-col justify-between h-full w-full  ">
                   <div>
-                    <div className="mt-6 flex w-full items-center justify-between">
+                    <div className="mt-5 flex w-full items-center justify-between">
                       <div className="flex items-center justify-between w-full">
                         <div className="flex items-center">
-                          <p className="text-2xl font-bold font-serif">
+                          <p className="text-2xl font-bold font-serif bg-primary rounded px-[5px] mt-6">
                             Choose Menu
                           </p>
                         </div>
                         <div
                           id="cross"
-                          className="text-gray-50 font-[900] text-[14px] bg-primary  px-2 py-1 rounded"
+                          className="text-gray-50 font-[900] text-[14px] bg-primary  px-2 py-1 rounded -mt-10"
                           onClick={() => setShow(!show)}
                         >
                             ⨉

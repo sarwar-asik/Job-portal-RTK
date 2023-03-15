@@ -1,18 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import { createUser } from "../../features/auth/authSlice";
 
 const SignUp = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const name = data.name;
+    const email = data.email;
+    const password = data.password;
+
+    if (password.length < 6) {
+      Swal.fire("Please Provide Strong Password", "", "error");
+    } else {
+      Swal.fire("Success", "Sign Up Success", "success");
+      dispatch(createUser({email,password}))
+    }
+
+    console.log(data);
+  };
 
   return (
-    <div className="relative lg:max-w-[93%] mx-auto">
+    <div className="relative lg:max-w-[93%] mx-auto mt-3">
       {/* <img
           src="https://images.pexels.com/photos/3228766/pexels-photo-3228766.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
           className="absolute inset-0 object-cover w-full h-full"
@@ -33,7 +50,7 @@ const SignUp = () => {
           <div className="flex flex-col items-center justify-between xl:flex-row">
             <div className="w-full max-w-xl mb-12 xl:mb-0 xl:pr-16 xl:w-7/12">
               <h2 className="max-w-lg mb-6 f text-4xl font-bold font-serif tracking-tight text-white sm:text-4xl sm:leading-none">
-                Sign Up to take the position
+                Sign Up <br /> take the position
               </h2>
               <p className="max-w-xl mb-4 text-base text-gray-200 md:text-[16px]">
                 Sed ut perspiciatis unde omnis iste natus error sit voluptatem
@@ -50,38 +67,22 @@ const SignUp = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="mb-1 sm:mb-2">
                     <label
-                      htmlFor="firstName"
+                      htmlFor="name"
                       className="inline-block mb-1 font-medium"
                     >
-                      First name
+                      Name
                     </label>
                     <input
-                      {...register("firstName")}
+                      {...register("name")}
                       placeholder="John"
                       required
                       type="text"
                       className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-                      id="firstName"
-                      name="firstName"
+                      id="name"
+                      name="name"
                     />
                   </div>
-                  <div className="mb-1 sm:mb-2">
-                    <label
-                      htmlFor="lastName"
-                      className="inline-block mb-1 font-medium"
-                    >
-                      Last name
-                    </label>
-                    <input
-                      {...register("lastName")}
-                      placeholder="Doe"
-                      required
-                      type="text"
-                      className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-                      id="lastName"
-                      name="lastName"
-                    />
-                  </div>
+
                   <div className="mb-1 sm:mb-2">
                     <label
                       htmlFor="email"
@@ -119,7 +120,7 @@ const SignUp = () => {
                   <div className="mt-4 mb-2 sm:mb-4">
                     <button
                       type="submit"
-                      className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide transition duration-200 rounded shadow-md bg-deep-purple-accent-400 bg-primary text-white hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                      className="inline-flex  items-center justify-center w-full h-12 px-6 font-medium tracking-wide transition duration-200 rounded shadow-md bg-deep-purple-accent-400 bg-primary text-white hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                     >
                       Sign Up
                     </button>
