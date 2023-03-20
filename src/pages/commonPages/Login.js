@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { createUser } from "../../features/auth/authSlice";
 
-const SignUp = () => {
+const Login = () => {
   const dispatch = useDispatch();
   const {
     register,
@@ -22,7 +22,7 @@ const SignUp = () => {
       Swal.fire("Please Provide Strong Password", "", "error");
     } else {
       Swal.fire("Success", "Sign Up Success", "success");
-      dispatch(createUser({ email, password }));
+    //   dispatch(createUser({ email, password }));
     }
 
     console.log(data);
@@ -30,11 +30,7 @@ const SignUp = () => {
 
   return (
     <div className="relative lg:max-w-[93%] mx-auto mt-3">
-      {/* <img
-          src="https://images.pexels.com/photos/3228766/pexels-photo-3228766.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-          className="absolute inset-0 object-cover w-full h-full"
-          alt=""
-        /> */}
+   
       <div className="absolute inset-0 object-cover bg-primary w-full h-full"></div>
       <div className="relative bg-opacity-75 bg-deep-purple-accent-700">
         <svg
@@ -62,26 +58,10 @@ const SignUp = () => {
             <div className="w-full max-w-xl xl:px-8 xl:w-5/12">
               <div className="bg-white rounded shadow-2xl p-7 sm:p-10">
                 <h3 className="mb-4 text-4xl font-bold text-center sm:mb-6 sm:text-4xl">
-                  Sign up
+               Log In
                 </h3>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <div className="mb-1 sm:mb-2">
-                    <label
-                      htmlFor="name"
-                      className="inline-block mb-1 font-medium"
-                    >
-                      Name
-                    </label>
-                    <input
-                      {...register("name")}
-                      placeholder="John"
-                      required
-                      type="text"
-                      className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-                      id="name"
-                      name="name"
-                    />
-                  </div>
+                 
 
                   <div className="mb-1 sm:mb-2">
                     <label
@@ -122,11 +102,11 @@ const SignUp = () => {
                       type="submit"
                       className="inline-flex  items-center justify-center w-full h-12 px-6 font-medium tracking-wide transition duration-200 rounded shadow-md bg-deep-purple-accent-400 bg-primary text-white hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                     >
-                      Sign Up
+                      Login 
                     </button>
                   </div>
                   <p className="text-xs font-[400] font-mono text-gray-600 sm:text-sm">
-                    Already Sign Up ?<Link to="/login"> Log in , please ....</Link>
+                    Did not create account ?<Link to="/signup"> Sign Up, please ....</Link>
                   </p>
                 </form>
               </div>
@@ -138,4 +118,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;
