@@ -3,29 +3,29 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import { createUser } from "../../features/auth/authSlice";
+import { loginUser } from "../../features/auth/authSlice";
+
 
 const Login = () => {
   const dispatch = useDispatch();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => {
-    const name = data.name;
-    const email = data.email;
-    const password = data.password;
+  const { register, handleSubmit,formState: { errors },} = useForm();
+
+
+  const onSubmit = ({email,password}) => {
+   
+    // const email = data.email;
+    // const password = data.password;
 
     if (password.length < 6) {
       Swal.fire("Please Provide Strong Password", "", "error");
     } else {
       Swal.fire("Success", "Sign Up Success", "success");
+      console.log(email,password);
     //   dispatch(createUser({ email, password }));
+    dispatch(loginUser({email,password}))
     }
 
-    console.log(data);
+   
   };
 
   return (
