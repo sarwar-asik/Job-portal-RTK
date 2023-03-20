@@ -1,9 +1,19 @@
+import { signOut } from "firebase/auth";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import auth from "../firebase/firebase.config";
 // import logo from "../../assets/logo-removebg-preview.png";
 
 const Navbar = () => {
   const [show, setShow] = useState(null || false);
+
+  const { email, } = useSelector((state) => state.auth);
+
+  const handleLogout = ()=>{
+    signOut(auth)
+  }
+
   const MenuItem = (
     <React.Fragment>
       <Link
@@ -13,6 +23,7 @@ const Navbar = () => {
       >
         Home
       </Link>
+    
       <Link
         to="/signup"
         onClick={() => setShow(!show)}
@@ -20,13 +31,19 @@ const Navbar = () => {
       >
         SIgn Up
       </Link>
-      <Link
-        to="/login"
-        onClick={() => setShow(!show)}
-        className=" pr-[25px] focus:outline-none -gray-300  transition duration-150 ease-in-out hover:bg-[#285B96] hover:text-white  rounded font-medium  px-5 py-2 "
-      >
-        Login
-      </Link>
+      {email ? (
+        <button
+        className=" pr-[25px] focus:outline-none -gray-300  transition duration-150 ease-in-out text-red-500 hover:bg-red-500 hover:text-white  rounded font-medium  px-5 py-2 "
+        >Logout</button>
+      ) : (
+        <Link
+          to="/login"
+          onClick={() => setShow(!show)}
+          className=" pr-[25px] focus:outline-none -gray-300  transition duration-150 ease-in-out hover:bg-[#285B96] hover:text-white  rounded font-medium  px-5 py-2 "
+        >
+          Login
+        </Link>
+      )}
     </React.Fragment>
   );
   return (
@@ -142,7 +159,7 @@ const Navbar = () => {
                           className="text-gray-50 font-[900] text-[14px] bg-primary  px-2 py-1 rounded -mt-10"
                           onClick={() => setShow(!show)}
                         >
-                            ⨉
+                          ⨉
                           {/* <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="icon icon-tabler icon-tabler-x"
