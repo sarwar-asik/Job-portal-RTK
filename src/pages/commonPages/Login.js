@@ -29,8 +29,8 @@ const Login = () => {
     if (password.length < 6) {
       Swal.fire("Please Provide Strong Password", "", "error");
     } else {
-      Swal.fire("Success", "Sign Up Success", "success");
-      console.log(email, password);
+      // Swal.fire("Success", "Sign Up Success", "success");
+      // console.log(email, password);
       //   dispatch(createUser({ email, password }));
       dispatch(loginUser({ email, password }));
     }
@@ -110,11 +110,12 @@ const Login = () => {
                       Login
                     </button>
                   </div>
-                  <p className="text-xs font-[400] font-mono text-gray-600 sm:text-sm">
+                  
+                </form>
+                <p className="text-xs font-[400] font-mono text-gray-600 sm:text-sm">
                     Did not create account ?
                     <Link to="/signup"> Sign Up, please ....</Link>
                   </p>
-                </form>
               </div>
             </div>
           </div>

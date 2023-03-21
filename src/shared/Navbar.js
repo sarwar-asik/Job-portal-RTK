@@ -1,20 +1,23 @@
 import { signOut } from "firebase/auth";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
+import { logout } from "../features/auth/authSlice";
 import auth from "../firebase/firebase.config";
 // import logo from "../../assets/logo-removebg-preview.png";
 
 const Navbar = () => {
   const [show, setShow] = useState(null || false);
 
-  const { email, } = useSelector((state) => state.auth);
+  const { email } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-  const handleLogout = ()=>{
-    signOut(auth)
-    Swal.fire("Logout success","","success")
-
+  const handleLogout = () => {
+    signOut(auth).then(() => {
+      dispatch(logout());
+      Swal.fire("Logout success", "", "success");
+    })
   }
 
   const MenuItem = (
@@ -26,7 +29,7 @@ const Navbar = () => {
       >
         Home
       </Link>
-    
+
       <Link
         to="/signup"
         onClick={() => setShow(!show)}
@@ -34,11 +37,14 @@ const Navbar = () => {
       >
         SIgn Up
       </Link>
+
       {email ? (
         <button
-        onClick={handleLogout()}
-        className=" pr-[25px] focus:outline-none -gray-300  transition duration-150 ease-in-out text-red-500 hover:bg-red-500 hover:text-white  rounded font-medium  px-5 py-2 "
-        >Logout</button>
+          onClick={() => handleLogout()}
+          className=" pr-[25px] focus:outline-none  transition duration-150 ease-in-out  text-red-500 hover:bg-red-500 hover:text-white  rounded font-medium  px-5 py-2 "
+        >
+          Logout
+        </button>
       ) : (
         <Link
           to="/login"
