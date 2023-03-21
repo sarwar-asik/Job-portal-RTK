@@ -3,16 +3,12 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import { createUser } from "../../features/auth/authSlice";
+import { createUser, googleLogin } from "../../features/auth/authSlice";
 
 const SignUp = () => {
   const dispatch = useDispatch();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const {register,handleSubmit,formState: { errors }, } = useForm()
+
   const onSubmit = (data) => {
     const name = data.name;
     const email = data.email;
@@ -27,6 +23,12 @@ const SignUp = () => {
 
     console.log(data);
   };
+
+  const handleGoogleLogin = ()=>{
+    dispatch(googleLogin())
+  }
+
+
 
   return (
     <div className="relative lg:max-w-[93%] mx-auto mt-3">
@@ -129,6 +131,11 @@ const SignUp = () => {
                     Already Sign Up ?<Link to="/login"> Log in , please ....</Link>
                   </p>
                 </form>
+                <button
+                onClick={handleGoogleLogin()}
+                 className="bg-blue-700 mt-2 w-full text-red-50 py-3 font-bold font-serif rounded">
+                  Google Login
+                </button>
               </div>
             </div>
           </div>

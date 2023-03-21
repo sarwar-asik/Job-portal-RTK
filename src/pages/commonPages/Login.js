@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { loginUser } from "../../features/auth/authSlice";
+import { googleLogin, loginUser } from "../../features/auth/authSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -17,10 +17,10 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoading && email) {
-      Swal.fire("SuccessFully Login ","","success")
-      navigate("/");
-    }
+    // if (!isLoading && email) {
+    //   Swal.fire("SuccessFully Login ","","success")
+    //   navigate("/");
+    // }
   }, [isLoading, email, navigate]);
 
   const onSubmit = ({ email, password }) => {
@@ -29,12 +29,24 @@ const Login = () => {
     if (password.length < 6) {
       Swal.fire("Please Provide Strong Password", "", "error");
     } else {
+      dispatch(loginUser({ email, password }))
+
+      if (!isLoading && email) {
+        Swal.fire("SuccessFully Login ","","success")
+        navigate("/");
+      }
       // Swal.fire("Success", "Sign Up Success", "success");
       // console.log(email, password);
       //   dispatch(createUser({ email, password }));
-      dispatch(loginUser({ email, password }));
+      
     }
   };
+
+
+  
+  const handleGoogleLogin = ()=>{
+    dispatch(googleLogin())
+  }
 
   return (
     <div className="relative lg:max-w-[93%] mx-auto mt-3">
@@ -116,6 +128,11 @@ const Login = () => {
                     Did not create account ?
                     <Link to="/signup"> Sign Up, please ....</Link>
                   </p>
+                  <button
+                onClick={handleGoogleLogin()}
+                 className="bg-blue-700 mt-2 w-full text-red-50 py-3 font-bold font-serif rounded">
+                  Google Login
+                </button>
               </div>
             </div>
           </div>

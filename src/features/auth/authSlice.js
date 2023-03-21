@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 
@@ -30,14 +32,23 @@ export const loginUser = createAsyncThunk(
     return data;
   }
 );
+export const googleLogin = createAsyncThunk("auth/googelLogin", async () => {
+  const googleProvider = new GoogleAuthProvider();
+  const data = await signInWithPopup(auth, googleProvider);
+  return data.user.email;
+});
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers:{
-    logout:(state)=>{
-      state.email =  ""
-    }
+  reducers: {
+    logout: (state) => {
+      state.email = "";
+    },
+    setUser: (state, { payload }) => {
+      state.email = payload;
+      state.isLoading = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -74,8 +85,25 @@ const authSlice = createSlice({
         state.isError = true;
         state.email = "";
         state.error = action.error.message;
+      })
+      .addCase(googleLogin.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.error = "";
+      })
+      .addCase(googleLogin.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.email = payload;
+        state.error = "";
+      })
+      .addCase(googleLogin.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.email = "";
+        state.error = action.error.message;
       });
   },
 });
-export const  {logout} = authSlice.actions
+export const { logout, setUser } = authSlice.actions;
 export default authSlice.reducer;
