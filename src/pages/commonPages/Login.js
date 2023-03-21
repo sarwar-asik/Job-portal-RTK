@@ -1,36 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { loginUser } from "../../features/auth/authSlice";
 
-
 const Login = () => {
   const dispatch = useDispatch();
-  const { register, handleSubmit,formState: { errors },} = useForm();
 
+  const { isLoading, email } = useSelector((state) => state.auth);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const navigate = useNavigate();
 
-  const onSubmit = ({email,password}) => {
-   
+  useEffect(() => {
+    if (!isLoading && email) {
+      Swal.fire("SuccessFully Login ","","success")
+      navigate("/");
+    }
+  }, [isLoading, email, navigate]);
+
+  const onSubmit = ({ email, password }) => {
     // const email = data.email;
     // const password = data.password;
-
     if (password.length < 6) {
       Swal.fire("Please Provide Strong Password", "", "error");
     } else {
       Swal.fire("Success", "Sign Up Success", "success");
-      console.log(email,password);
-    //   dispatch(createUser({ email, password }));
-    dispatch(loginUser({email,password}))
+      console.log(email, password);
+      //   dispatch(createUser({ email, password }));
+      dispatch(loginUser({ email, password }));
     }
-
-   
   };
 
   return (
     <div className="relative lg:max-w-[93%] mx-auto mt-3">
-   
       <div className="absolute inset-0 object-cover bg-primary w-full h-full"></div>
       <div className="relative bg-opacity-75 bg-deep-purple-accent-700">
         <svg
@@ -58,11 +65,9 @@ const Login = () => {
             <div className="w-full max-w-xl xl:px-8 xl:w-5/12">
               <div className="bg-white rounded shadow-2xl p-7 sm:p-10">
                 <h3 className="mb-4 text-4xl font-bold text-center sm:mb-6 sm:text-4xl">
-               Log In
+                  Log In
                 </h3>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                 
-
                   <div className="mb-1 sm:mb-2">
                     <label
                       htmlFor="email"
@@ -102,11 +107,12 @@ const Login = () => {
                       type="submit"
                       className="inline-flex  items-center justify-center w-full h-12 px-6 font-medium tracking-wide transition duration-200 rounded shadow-md bg-deep-purple-accent-400 bg-primary text-white hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                     >
-                      Login 
+                      Login
                     </button>
                   </div>
                   <p className="text-xs font-[400] font-mono text-gray-600 sm:text-sm">
-                    Did not create account ?<Link to="/signup"> Sign Up, please ....</Link>
+                    Did not create account ?
+                    <Link to="/signup"> Sign Up, please ....</Link>
                   </p>
                 </form>
               </div>
