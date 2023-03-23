@@ -48,8 +48,8 @@ const authSlice = createSlice({
     setUser: (state, { payload }) => {
       state.email = payload;
       state.isLoading = false;
-    },
-  },
+    }         
+  },  
   extraReducers: (builder) => {
     builder
       .addCase(createUser.pending, (state) => {

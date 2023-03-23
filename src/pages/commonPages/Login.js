@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ import { googleLogin, loginUser } from "../../features/auth/authSlice";
 const Login = () => {
   const dispatch = useDispatch();
 
-  const { isLoading, email } = useSelector((state) => state.auth);
+  const { isLoading, email,isError,error } = useSelector((state) => state.auth);
   const {
     register,
     handleSubmit,
@@ -17,11 +17,21 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // if (!isLoading && email) {
-    //   Swal.fire("SuccessFully Login ","","success")
-    //   navigate("/");
-    // }
+    if (!isLoading && email) {
+      Swal.fire("SuccessFully Login ","","success")
+      navigate("/");
+    }
   }, [isLoading, email, navigate]);
+
+  useEffect(() => {
+    if (isError && error) {
+      Swal.fire(error,"","error")
+   
+    }
+  }, [isError,error]);
+
+
+  
 
   const onSubmit = ({ email, password }) => {
     // const email = data.email;
@@ -29,24 +39,21 @@ const Login = () => {
     if (password.length < 6) {
       Swal.fire("Please Provide Strong Password", "", "error");
     } else {
-      dispatch(loginUser({ email, password }))
+      dispatch(loginUser({ email, password }));
 
-      if (!isLoading && email) {
-        Swal.fire("SuccessFully Login ","","success")
-        navigate("/");
-      }
+      // if (!isLoading && email && !isError &&error ==="" ) {
+      //   Swal.fire("SuccessFully Login ", "", "success");
+      //   navigate("/");
+      // }
       // Swal.fire("Success", "Sign Up Success", "success");
       // console.log(email, password);
       //   dispatch(createUser({ email, password }));
-      
     }
   };
 
-
-  
-  const handleGoogleLogin = ()=>{
-    dispatch(googleLogin())
-  }
+  const handleGoogleLogin = () => {
+    dispatch(googleLogin());
+  };
 
   return (
     <div className="relative lg:max-w-[93%] mx-auto mt-3">
@@ -114,6 +121,11 @@ const Login = () => {
                       name="password"
                     />
                   </div>
+                  
+                    {
+                      isError && <span className="text-red-500 font-mono ">{error}</span>
+                    }
+                
                   <div className="mt-4 mb-2 sm:mb-4">
                     <button
                       type="submit"
@@ -122,15 +134,15 @@ const Login = () => {
                       Login
                     </button>
                   </div>
-                  
                 </form>
                 <p className="text-xs font-[400] font-mono text-gray-600 sm:text-sm">
-                    Did not create account ?
-                    <Link to="/signup"> Sign Up, please ....</Link>
-                  </p>
-                  <button
-                onClick={handleGoogleLogin()}
-                 className="bg-blue-700 mt-2 w-full text-red-50 py-3 font-bold font-serif rounded">
+                  Did not create account ?
+                  <Link to="/signup"> Sign Up, please ....</Link>
+                </p>
+                <button
+                  onClick={handleGoogleLogin}
+                  className="bg-blue-700 mt-2 w-full text-red-50 py-3 font-bold font-serif rounded"
+                >
                   Google Login
                 </button>
               </div>
@@ -142,4 +154,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default React.memo(Login);

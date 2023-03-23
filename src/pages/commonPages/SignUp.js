@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { createUser, googleLogin } from "../../features/auth/authSlice";
 
 const SignUp = () => {
   const dispatch = useDispatch();
   const {register,handleSubmit,formState: { errors }, } = useForm()
+
+  const {error,isError,isLoading,email} = useSelector(state=>state.auth)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (isError && error) {
+      Swal.fire(error,"","error")
+   
+    }
+  }, [isError,error]);
 
   const onSubmit = (data) => {
     const name = data.name;
@@ -17,7 +27,7 @@ const SignUp = () => {
     if (password.length < 6) {
       Swal.fire("Please Provide Strong Password", "", "error");
     } else {
-      Swal.fire("Success", "Sign Up Success", "success");
+      // Swal.fire("Success", "Sign Up Success", "success");
       dispatch(createUser({ email, password }));
     }
 
@@ -27,6 +37,12 @@ const SignUp = () => {
   const handleGoogleLogin = ()=>{
     dispatch(googleLogin())
   }
+  useEffect(() => {
+    if (!isLoading && email) {
+      Swal.fire("SuccessFully Login ","","success")
+      navigate("/");
+    }
+  }, [isLoading, email, navigate]);
 
 
 
@@ -119,6 +135,10 @@ const SignUp = () => {
                       name="password"
                     />
                   </div>
+                  
+                  {
+                      isError && <span className="text-red-500 font-mono ">{error}</span>
+                    }
                   <div className="mt-4 mb-2 sm:mb-4">
                     <button
                       type="submit"
@@ -132,7 +152,7 @@ const SignUp = () => {
                   </p>
                 </form>
                 <button
-                onClick={handleGoogleLogin()}
+                onClick={handleGoogleLogin}
                  className="bg-blue-700 mt-2 w-full text-red-50 py-3 font-bold font-serif rounded">
                   Google Login
                 </button>
