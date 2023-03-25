@@ -17,8 +17,8 @@ const Navbar = () => {
     signOut(auth).then(() => {
       dispatch(logout());
       Swal.fire("Logout success", "", "success");
-    })
-  }
+    });
+  };
 
   const MenuItem = (
     <React.Fragment>
@@ -39,12 +39,21 @@ const Navbar = () => {
       </Link>
 
       {email ? (
-        <button
-          onClick={() => handleLogout()}
-          className=" pr-[25px] focus:outline-none  transition duration-150 ease-in-out  text-red-500 hover:bg-red-500 hover:text-white  rounded font-medium  px-5 py-2 "
-        >
-          Logout
-        </button>
+        <>
+          <button
+            onClick={() => handleLogout()}
+            className=" pr-[25px] focus:outline-none  transition duration-150 ease-in-out  text-red-500 hover:bg-red-500 hover:text-white  rounded font-medium  px-5 py-2 "
+          >
+            Logout
+          </button>
+          <Link
+            to="/dashboard"
+            onClick={() => setShow(!show)}
+            className=" pr-[25px] focus:outline-none -gray-300  transition duration-150 ease-in-out hover:bg-[#285B96] hover:text-white  rounded font-medium  px-5 py-2 "
+          >
+            DashBoard
+          </Link>
+        </>
       ) : (
         <Link
           to="/login"

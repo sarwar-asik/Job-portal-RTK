@@ -5,12 +5,13 @@ import Header from "../pages/commonPages/Header";
 import SignUp from "../pages/commonPages/SignUp";
 import "sweetalert2/src/sweetalert2";
 import { useDispatch } from "react-redux";
+import { setUser } from "../features/auth/authSlice";
 
 // /src/sweetalert2.scss
 const Home = () => {
   const dispatch = useDispatch();
 
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -19,7 +20,7 @@ const Home = () => {
     return () => unSubscribe();
   }, [dispatch]);
 
-  console.table(user,"user...........")
+  // console.table(user,"user...........")
 
   return (
     <div>
