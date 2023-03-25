@@ -10,7 +10,7 @@ import auth from "../firebase/firebase.config";
 const Navbar = () => {
   const [show, setShow] = useState(null || false);
 
-  const { email } = useSelector((state) => state.auth);
+  const { email, role } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -46,13 +46,7 @@ const Navbar = () => {
           >
             Logout
           </button>
-          <Link
-            to="/dashboard"
-            onClick={() => setShow(!show)}
-            className=" pr-[25px] focus:outline-none -gray-300  transition duration-150 ease-in-out hover:bg-[#285B96] hover:text-white  rounded font-medium  px-5 py-2 "
-          >
-            DashBoard
-          </Link>
+       
         </>
       ) : (
         <Link
@@ -62,6 +56,24 @@ const Navbar = () => {
         >
           Login
         </Link>
+      )}
+      {email && !role && (
+        <>
+          <Link
+            to="/register"
+            onClick={() => setShow(!show)}
+            className=" pr-[25px] focus:outline-none -gray-300  transition duration-150 ease-in-out hover:bg-[#285B96] hover:text-white  rounded font-medium  px-5 py-2 "
+          >
+            Register
+          </Link>
+          <Link
+            to="/dashboard"
+            onClick={() => setShow(!show)}
+            className=" pr-[25px] focus:outline-none -gray-300  transition duration-150 ease-in-out hover:bg-[#285B96] hover:text-white  rounded font-medium  px-5 py-2 "
+          >
+            DashBoard
+          </Link>
+        </>
       )}
     </React.Fragment>
   );
