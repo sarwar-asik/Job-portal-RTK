@@ -5,13 +5,11 @@ import { useRegisterMutation } from "../../features/auth/authApi";
 const CandidateRegister = () => {
   const [postCandidate, { isLoading,isError,isSuccess }] = useRegisterMutation();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register,handleSubmit,formState: { errors },} = useForm();
+
   const onSubmit = (data) => {
     console.log(data);
+    postCandidate({...data,role:"Employer"})
   };
 
   return (
@@ -82,12 +80,12 @@ const CandidateRegister = () => {
               Your role
             </label>
             <input
-              {...register("role")}
+              {...register("CompanyRole")}
               required
               type="text"
               className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-              id="role"
-              name="role"
+              id="CompanyRole"
+              name="CompanyRole"
             />
           </div>
           <div className="mb-1 sm:mb-2">
