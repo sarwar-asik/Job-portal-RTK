@@ -1,7 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useRegisterMutation } from "../../features/auth/authApi";
 
 const CandidateRegister = () => {
+  const [postCandidate, { isLoading,isError,isSuccess }] = useRegisterMutation();
+
   const {
     register,
     handleSubmit,
