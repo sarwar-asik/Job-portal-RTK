@@ -3,13 +3,18 @@ import { useForm } from "react-hook-form";
 import { useRegisterMutation } from "../../features/auth/authApi";
 
 const CandidateRegister = () => {
-  const [postCandidate, { isLoading,isError,isSuccess }] = useRegisterMutation();
+  const [postCandidate, { isLoading, isError, isSuccess }] =
+    useRegisterMutation();
 
-  const { register,handleSubmit,formState: { errors },} = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
-    postCandidate({...data,role:"Employer"})
+    postCandidate({ ...data, role: "Employer" });
   };
 
   return (
