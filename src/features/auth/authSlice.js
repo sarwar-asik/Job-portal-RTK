@@ -6,6 +6,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
+import mainApi from "../../shared/mainApi";
 
 const initialState = {
   user: { email: "", role: "" },
@@ -34,6 +35,15 @@ export const googleLogin = createAsyncThunk("auth/googelLogin", async () => {
   const googleProvider = new GoogleAuthProvider();
   const data = await signInWithPopup(auth, googleProvider);
   return data.user.email;
+});
+// http://localhost:30002/register/users/sarwarasik@gmail.com
+
+export const getUser = createAsyncThunk("auth/getUser", async (email) => {
+  const res = await fetch(`${mainApi}/register/users/${email}`);
+  // console.log(email, password);
+  const data = await res.json();
+  console.log(data, "from getUser");
+  return data;
 });
 
 const authSlice = createSlice({
@@ -99,6 +109,24 @@ const authSlice = createSlice({
         state.error = "";
       })
       .addCase(googleLogin.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.user.email = "";
+        state.error = action.error.message;
+      })
+      .addCase(getUser.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.error = "";
+      })
+      .addCase(getUser.fulfilled, (state, { payload }) => {
+        // console.log(payload,"from fullfilled");
+        state.isLoading = false;
+        state.isError = false;
+        state.user = payload;
+        state.error = "";
+      })
+      .addCase(getUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.user.email = "";
