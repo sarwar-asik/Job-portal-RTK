@@ -6,7 +6,7 @@ import Loader from "../shared/Loader";
 
 const PrivateRoutes = ({ children }) => {
   const { pathname } = useLocation();
-  const { isLoading, email } = useSelector((state) => state.auth);
+  const { isLoading, user:{email} } = useSelector((state) => state.auth);
 
   if (isLoading) {
     return <Loader/>

@@ -1,8 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 import { useRegisterMutation } from "../../features/auth/authApi";
 
 const CandidateRegister = () => {
+  const {user:{email}} = useSelector(state =>state.auth)
   const [postCandidate, { isLoading, isError, isSuccess }] =
     useRegisterMutation();
 
@@ -10,7 +12,11 @@ const CandidateRegister = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm(
+    {
+      defaultValues:{email:email}
+    }
+  );
 
   const onSubmit = (data) => {
     console.log(data);
@@ -60,9 +66,13 @@ const CandidateRegister = () => {
             </label>
             <input
               {...register("email")}
-              required
+              disabled
+
+              // defaultValue={user.email}
               type="email"
-              className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
+              className=" 
+            cursor-not-allowed
+              flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
               id="email"
               name="email"
             />
