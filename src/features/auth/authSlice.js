@@ -42,8 +42,11 @@ export const getUser = createAsyncThunk("auth/getUser", async (email) => {
   const res = await fetch(`${mainApi}/register/users/${email}`);
   // console.log(email, password);
   const data = await res.json();
-  console.log(data, "from getUser");
-  return data;
+  // console.log(data, "from getUser");
+  if (data.status) {
+    return data;
+  }
+  return email;
 });
 
 const authSlice = createSlice({
@@ -121,9 +124,14 @@ const authSlice = createSlice({
       })
       .addCase(getUser.fulfilled, (state, { payload }) => {
         // console.log(payload,"from fullfilled");
+        if (payload.status) {
+          state.user = payload.data;
+        } else {
+          state.user.email = payload;
+        }
         state.isLoading = false;
         state.isError = false;
-        state.user = payload;
+
         state.error = "";
       })
       .addCase(getUser.rejected, (state, action) => {
