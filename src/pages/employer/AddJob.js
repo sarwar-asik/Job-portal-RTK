@@ -41,11 +41,11 @@ const AddJob = () => {
 
   const removeInputList = (i) => {
     // const list = [...inputList];
-    inputList.splice(i-1, 1);
+    inputList.splice(i, 1);
     // const newList = inputList.filter((value, index) => index !== i - 1);
     // delete list[i+1]
     // setInputList([...list]);
-    console.log( "index=", i, "list=", inputList);
+    console.log("index=", i, "list=", inputList);
   };
 
   const onSubmit = (data) => {
@@ -76,7 +76,7 @@ const AddJob = () => {
               {inputList.length > 1 && (
                 <button
                   className="bg-red-300 p-2 "
-                  onClick={() => removeInputList(index + 1)}
+                  onClick={() => removeInputList(index)}
                 >
                   Remove
                 </button>
