@@ -19,7 +19,7 @@ const AddJob = () => {
 
       setInputList(inputList);
 
-        console.log(e, "index==", index,inputList, "inputListLength", inputList.length);
+      //   console.log(e, "index==", index,inputList, "inputListLength", inputList.length);
     }
 
     //   const inputList2 = inputList.filter((str) => str !== '')
@@ -41,12 +41,11 @@ const AddJob = () => {
 
   const removeInputList = (i) => {
     // const list = [...inputList];
-    // list.splice(i, 1)
-    const newList = inputList.filter((value, index) => index !== i - 1);
+    inputList.splice(i-1, 1);
+    // const newList = inputList.filter((value, index) => index !== i - 1);
     // delete list[i+1]
-    // setInputList([...newList])
-    setInputList(newList);
-    console.log(newList, "index=", i, "list=", inputList);
+    // setInputList([...list]);
+    console.log( "index=", i, "list=", inputList);
   };
 
   const onSubmit = (data) => {
@@ -70,7 +69,7 @@ const AddJob = () => {
                 //   multiple
                 onBlur={(e) => handleChange(e.target.value, index + 1)}
                 className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-                defaultValue={inputList[index + 1]}
+                // defaultValue={inputList[index+1]}
                 id="Skills"
                 name="Skills"
               />
