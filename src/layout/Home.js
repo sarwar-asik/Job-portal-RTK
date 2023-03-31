@@ -5,10 +5,8 @@ import "sweetalert2/src/sweetalert2";
 
 // /src/sweetalert2.scss
 const Home = () => {
-  const id = useId();
   // console.log(id, "unique id");
   // console.table(user,"user...........")
-
   return (
     <div>
       <Header />

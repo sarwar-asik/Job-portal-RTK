@@ -6,6 +6,7 @@ import CandidateRegister from "../pages/candidate/CandidateRegister";
 import Login from "../pages/commonPages/Login";
 import Register from "../pages/commonPages/Register";
 import SignUp from "../pages/commonPages/SignUp";
+import AddJob from "../pages/employer/AddJob";
 import PrivateRoutes from "./PrivateRoutes";
 
 const routes = createBrowserRouter([
@@ -28,7 +29,14 @@ const routes = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard/>,
+        children:[
+          {
+            path: "/dashboard/addJob",
+            element: <AddJob/>,
+          },
+        ]
       },
+     
       {
         path: "/register",
         element: <PrivateRoutes>
