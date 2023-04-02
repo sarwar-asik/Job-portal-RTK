@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { set, useForm } from "react-hook-form";
+import useDynamicInput from "../../hooks/useDynamicInput";
 
 const AddJob = () => {
   const {
@@ -8,43 +9,44 @@ const AddJob = () => {
     formState: { errors },
   } = useForm();
 
-  let [inputList, setInputList] = useState([]);
+  // const [inputList, setInputList] = useState([]);
 
-  const handleChange = useCallback(
-    (e, index) => {
-      const inputData = [...inputList];
-      inputData[index] = e;
+  // const handleChange = useCallback(
+  //   (e, index) => {
+  //     const inputData = [...inputList];
+  //     inputData[index] = e;
 
-      setInputList(inputData);
+  //     setInputList(inputData);
 
-      // console.log(
-      //   e,
-      //   "index==",
-      //   index,
-      //   inputList,
-      //   "inputListLength",
-      //   inputList.length
-      // )
-    },
-    [inputList]
-  );
+  //     // console.log(
+  //     //   e,
+  //     //   "index==",
+  //     //   index,
+  //     //   inputList,
+  //     //   "inputListLength",
+  //     //   inputList.length
+  //     // )
+  //   },
+  //   [inputList]
+  // );
 
-  const addInput = () => {
-    const addData = [...inputList, []];
-    setInputList(addData);
-  };
+  // const addInput = () => {
+  //   const addData = [...inputList, []];
+  //   setInputList(addData);
+  // };
 
-  const removeInputList = (i) => {
-    const list = [...inputList];
-    list.splice(i, 1);
-    setInputList(list);
-  };
+  // const removeInputList = (i) => {
+  //   const list = [...inputList];
+  //   list.splice(i, 1);
+  //   setInputList(list);
+  // };
+  const [handleChange, addInput, removeInputList,inputList] = useDynamicInput()
 
   const onSubmit = useCallback((data) => {
-    // const newData ={...data,skills:inputList}
-    // console.log(newData);
-    console.log(data);
-  }, []);
+    const newData ={...data,skills:inputList}
+    console.log(newData);
+    // console.log(data);
+  }, [inputList]);
 
   return (
     <div className="px-3">
@@ -166,20 +168,20 @@ const AddJob = () => {
                   // name="skills"
                 />
                 {inputList.length > 1 && (
-                  <button
+                  <p
                     className="bg-red-300 p-2 "
                     onClick={() => removeInputList(index)}
                   >
                     Remove
-                  </button>
+                  </p>
                 )}
               </div>
             );
           })}
         </section>
-        <button className="bg-slate-200 p-3 " onClick={() => addInput()}>
+        <p className="bg-slate-200 p-3 " onClick={() => addInput()}>
           Add Skills
-        </button>
+        </p>
 
         <div className="mt-4 mb-2 sm:mb-4">
           <button
