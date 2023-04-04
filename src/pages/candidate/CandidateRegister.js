@@ -7,7 +7,6 @@ const CandidateRegister = () => {
   const {user:{email}} = useSelector(state =>state.auth)
   const [postCandidate, { isLoading, isError, isSuccess }] =
     useRegisterMutation();
-
   const {
     register,
     handleSubmit,

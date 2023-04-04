@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { set, useForm } from "react-hook-form";
+import { usePostJobMutation } from "../../features/job/jobApi";
 import useDynamicInput from "../../hooks/useDynamicInput";
 
 const AddJob = () => {
@@ -9,44 +10,21 @@ const AddJob = () => {
     formState: { errors },
   } = useForm();
 
-  // const [inputList, setInputList] = useState([]);
+  const [postJobDB,{isError,isSuccess,isLoading}] = usePostJobMutation()
 
-  // const handleChange = useCallback(
-  //   (e, index) => {
-  //     const inputData = [...inputList];
-  //     inputData[index] = e;
+ 
+  const [handleChange, addInput, removeInputList, inputList] =
+    useDynamicInput();
 
-  //     setInputList(inputData);
-
-  //     // console.log(
-  //     //   e,
-  //     //   "index==",
-  //     //   index,
-  //     //   inputList,
-  //     //   "inputListLength",
-  //     //   inputList.length
-  //     // )
-  //   },
-  //   [inputList]
-  // );
-
-  // const addInput = () => {
-  //   const addData = [...inputList, []];
-  //   setInputList(addData);
-  // };
-
-  // const removeInputList = (i) => {
-  //   const list = [...inputList];
-  //   list.splice(i, 1);
-  //   setInputList(list);
-  // };
-  const [handleChange, addInput, removeInputList,inputList] = useDynamicInput()
-
-  const onSubmit = useCallback((data) => {
-    const newData ={...data,skills:inputList}
-    console.log(newData);
-    // console.log(data);
-  }, [inputList]);
+  const onSubmit = useCallback(
+    (data) => {
+      const newData = { ...data, skills: inputList };
+      console.log(newData);
+      postJobDB(newData)
+      // console.log(data);
+    },
+    [inputList,postJobDB]
+  );
 
   return (
     <div className="px-3">
@@ -56,24 +34,24 @@ const AddJob = () => {
         <section className="grid sm:grid-cols-1 lg:grid-cols-2 gap-3 px-3">
           <div className="mb-1 sm:mb-2">
             <label
-              htmlFor="Experience"
+              htmlFor="experience"
               className="inline-block mb-1 font-medium"
             >
               Position
             </label>
             <input
-              {...register("Position")}
+              {...register("position")}
               required
               type="text"
               className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-              id="Position"
-              name="Position"
+              id="position"
+              name="position"
             />
           </div>
           {/* last Name */}
           <div className="mb-1 sm:mb-2">
             <label
-              htmlFor="Experience"
+              htmlFor="experience"
               className="inline-block mb-1 font-medium"
             >
               Company Name
@@ -89,25 +67,25 @@ const AddJob = () => {
           </div>
           <div className="mb-1 sm:mb-2">
             <label
-              htmlFor="Experience"
+              htmlFor="experience"
               className="inline-block mb-1 font-medium"
             >
               Experience
             </label>
             <input
-              {...register("Experience")}
-              // defaultValue={user.Experience}
+              {...register("experience")}
+              // defaultValue={user.experience}
               type="text"
               className=" 
               flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-              id="Experience"
-              name="Experience"
+              id="experience"
+              name="experience"
             />
           </div>
           {/* div */}
           <div className="mb-1 sm:mb-2">
             <label
-              htmlFor="Experience"
+              htmlFor="experience"
               className="inline-block mb-1 font-medium"
             >
               Work Place
@@ -124,31 +102,31 @@ const AddJob = () => {
           {/* div */}
           <div className="mb-1 sm:mb-2">
             <label
-              htmlFor="Experience"
+              htmlFor="experience"
               className="inline-block mb-1 font-medium"
             >
               Location
             </label>
             <input
-              {...register("Location")}
+              {...register("location")}
               required
               type="text"
               className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-              id="Location"
-              name="Location"
+              id="location"
+              name="location"
             />
           </div>
           {/* div */}
           <div className="col-span-full mb-1 sm:mb-2">
-            <label htmlFor="OverView" className="inline-block mb-1 font-medium">
+            <label htmlFor="overView" className="inline-block mb-1 font-medium">
               OverView
             </label>
             <textarea
-              {...register("OverView")}
+              {...register("overView")}
               required
               className=" w-full  h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
-              id="OverView"
-              name="OverView"
+              id="overView"
+              name="overView"
             />
           </div>
           {/* div */}
