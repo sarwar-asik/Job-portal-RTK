@@ -8,7 +8,7 @@ import auth from "../firebase/firebase.config";
 // import logo from "../../assets/logo-removebg-preview.png";
 
 const Navbar = () => {
-  const [show, setShow] = useState(null || false);
+  const [show, setShow] = useState(false || null);
 
   const { user, role } = useSelector((state) => state.auth);
   // console.log(user);

@@ -7,6 +7,7 @@ import Login from "../pages/commonPages/Login";
 import Register from "../pages/commonPages/Register";
 import SignUp from "../pages/commonPages/SignUp";
 import AddJob from "../pages/employer/AddJob";
+import MyJobs from "../pages/employer/MyJobs";
 import PrivateRoutes from "./PrivateRoutes";
 
 const routes = createBrowserRouter([
@@ -33,6 +34,10 @@ const routes = createBrowserRouter([
           {
             path: "/dashboard/addJob",
             element: <AddJob/>,
+          },
+          {
+            path: "/dashboard/myJob",
+            element: <MyJobs/>,
           },
         ]
       },

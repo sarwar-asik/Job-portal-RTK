@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import { set, useForm } from "react-hook-form";
 import { usePostJobMutation } from "../../features/job/jobApi";
 import useDynamicInput from "../../hooks/useDynamicInput";
+import jobImg from "../../assets/jobLottie.gif"
 
 const AddJob = () => {
   const {
@@ -27,9 +28,13 @@ const AddJob = () => {
   );
 
   return (
-    <div className="px-3">
-      <h2> Add a Job</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div className="px-3 ">
+    
+      <form onSubmit={handleSubmit(onSubmit)} className="px-2">
+      <aside className="block lg:flex items-center justify-center p-2">
+      <h2 className="text-4xl  font-bold font-serif px-2"> Add a Job</h2>
+     <img className="h-[280px] w-[300px]" src={jobImg} alt="jobImg" />
+      </aside>
         {/* fist name */}
         <section className="grid sm:grid-cols-1 lg:grid-cols-2 gap-3 px-3">
           <div className="mb-1 sm:mb-2">
