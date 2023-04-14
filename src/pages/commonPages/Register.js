@@ -12,7 +12,7 @@ const Register = () => {
       >
         <img
           src="https://img.freepik.com/premium-photo/employee-search-hr-concept-magnifier-with-abstract-employee-white-space_102583-2267.jpg?w=1060"
-          className="h-[350px] w-[90%]  rounded-lg"
+          className="h-[340px] w-[90%]  rounded-lg"
           alt="candidate"
         />
         <h4 className="text-xl font-bold font-serif">Candidate</h4>

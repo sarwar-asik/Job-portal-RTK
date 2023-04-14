@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { getDefaultNormalizer } from "@testing-library/react";
 import apiSlice from "../features/api/apiSlice";
 import authSlice from "../features/auth/authSlice";
 
