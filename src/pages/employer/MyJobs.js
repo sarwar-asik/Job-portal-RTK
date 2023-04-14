@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import { useGetJobsQuery, useJobByIdQuery } from "../../features/job/jobApi";
 import useGetData from "../../hooks/useGetData";
 import Swal from "sweetalert2";
+import mainApi from "../../shared/mainApi";
 
 const MyJobs = () => {
   // const data = useGetJobsQuery();
 
-  const [data] = useGetData("http://localhost:30002/api/v1/jobs");
+  const [data] = useGetData(`${mainApi}/api/v1/jobs`);
 
   // console.log(useJobByIdQuery("642bffc4680853685230b6a4"), "from id");
 
@@ -18,11 +19,15 @@ const MyJobs = () => {
 
   console.table("from useGetQuery", data, "my jobs");
   const applyJobs = (data) => {
-    Swal.fire(` Updating ${data}`);
+    Swal.fire(` Applying ${data}`);
   };
 
+  if(data.length<1){
+   return <h1 className="text-2xl text-center  mt-16 lg:mt-0  font-semibold">Loading Job .........</h1>
+  }
+
   return (
-    <div className="relative">
+    <div className="relative mt-16 lg:mt-0">
       <h2 className="text-3xl font-bold font-serif  my-3 text-center">
         Your Job {data.length}
       </h2>
