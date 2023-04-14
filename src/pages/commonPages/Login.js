@@ -135,9 +135,9 @@ const Login = () => {
                     </button>
                   </div>
                 </form>
-                <p className="text-xs font-[400] font-mono text-gray-600 sm:text-sm">
-                  Did not create account ?
-                  <Link to="/signup"> Sign Up, please ....</Link>
+                <p className="text-xs flex items-center justify-between font-[400] font-mono text-gray-600 sm:text-sm">
+                 <marquee behavior="scroll" direction="right"> Did not create account ?</marquee>
+                  <Link to="/signup"> Sign Up, please... </Link>
                 </p>
                 <button
                   onClick={handleGoogleLogin}

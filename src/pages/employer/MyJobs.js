@@ -19,11 +19,17 @@ const MyJobs = () => {
 
   console.table("from useGetQuery", data, "my jobs");
   const applyJobs = (data) => {
-    Swal.fire(` Applying ${data}`);
+    // Swal.fire(` Applying ${data}`);
+    navigator.clipboard.writeText(data)
+
   };
 
-  if(data.length<1){
-   return <h1 className="text-2xl text-center  mt-16 lg:mt-0  font-semibold">Loading Job .........</h1>
+  if (data.length < 1) {
+    return (
+      <h1 className="text-2xl text-center  mt-16 lg:mt-0  font-semibold">
+        Loading Job .........
+      </h1>
+    );
   }
 
   return (
@@ -57,10 +63,10 @@ const MyJobs = () => {
                     Salary : $ {salary ? salary : "3500"}
                   </h3>
                   <button
-                    onClick={() => applyJobs(position)}
+                    onClick={() => applyJobs(data)}
                     className="bg-[#122D61] p-2 text-white font-bold rounded"
                   >
-                    Apply
+                    Delete
                   </button>
                 </div>
               </aside>

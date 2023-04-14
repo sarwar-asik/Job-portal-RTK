@@ -5,7 +5,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   return (
     <div className="block lg:flex justify-between gap-5 mb-5 mt-4 px-2 relative">
-      <section className="text-[16px] flex lg:flex-col gap-2 font-bold lg:w-[15%] bg-slate-200 shadow lg:min-h-[500px] py-3 rounded-md fixed z-40
+      <section className="text-[16px] flex  lg:flex-col gap-2 font-bold lg:w-[15%] bg-slate-200 shadow lg:min-h-[500px] py-3 rounded-md fixed z-40
       top-[68px] lg:static w-full">
         <Link
           to="/dashboard/addJob"
