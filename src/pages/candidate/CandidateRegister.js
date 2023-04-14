@@ -23,13 +23,13 @@ const CandidateRegister = () => {
   };
 
   return (
-    <div className="w-[90%] mx-auto mt-5">
+    <div className="lg:w-[70%] mx-auto mt-5 ">
       <h2 className="text-2xl  font-bold font-serif my-3">
         {" "}
         Candidate Registration
       </h2>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="container">
         {/* fist name */}
         <section className="grid sm:grid-cols-1 lg:grid-cols-2 gap-3 px-3">
           <div className="mb-1 sm:mb-2">
