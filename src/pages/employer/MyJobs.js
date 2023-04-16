@@ -17,10 +17,14 @@ const MyJobs = () => {
   //   .then(res=>res.json()).then(data=>console.log(data))
   // },[])
 
+
+  
+
   console.table("from useGetQuery", data, "my jobs");
   const applyJobs = (data) => {
-    // Swal.fire(` Applying ${data}`);
-    navigator.clipboard.writeText(data)
+    const stringData = JSON.stringify(data)
+    Swal.fire(` Coppied ${stringData}`);
+    navigator.clipboard.writeText(stringData)
 
   };
 
@@ -66,7 +70,7 @@ const MyJobs = () => {
                     onClick={() => applyJobs(data)}
                     className="bg-[#122D61] p-2 text-white font-bold rounded"
                   >
-                    Delete
+                    Delete/Copy
                   </button>
                 </div>
               </aside>
