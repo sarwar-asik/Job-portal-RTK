@@ -3,6 +3,7 @@ import { useGetJobsQuery, useJobByIdQuery } from "../../features/job/jobApi";
 import useGetData from "../../hooks/useGetData";
 import Swal from "sweetalert2";
 import mainApi from "../../shared/mainApi";
+import Loader from "../../shared/Loader";
 
 const MyJobs = () => {
   // const data = useGetJobsQuery();
@@ -21,18 +22,17 @@ const MyJobs = () => {
   
 
   console.table("from useGetQuery", data, "my jobs");
+  
   const applyJobs = (data) => {
     const stringData = JSON.stringify(data)
-    Swal.fire(` Coppied ${stringData}`);
+    Swal.fire(` Coppied `);
     navigator.clipboard.writeText(stringData)
 
   };
 
   if (data.length < 1) {
     return (
-      <h1 className="text-2xl text-center  mt-16 lg:mt-0  font-semibold">
-        Loading Job .........
-      </h1>
+     <Loader/>
     );
   }
 

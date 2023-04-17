@@ -25,34 +25,42 @@ const routes = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <Login/>,
+        element: <Login />,
       },
       {
         path: "/dashboard",
-        element: <Dashboard/>,
-        children:[
+        element: <Dashboard />,
+        children: [
+          {
+            path: "/dashboard",
+            element: <MyJobs />,
+          },
           {
             path: "/dashboard/addJob",
-            element: <AddJob/>,
+            element: <AddJob />,
           },
           {
             path: "/dashboard/myJob",
-            element: <MyJobs/>,
+            element: <MyJobs />,
           },
-        ]
+        ],
       },
-     
+
       {
         path: "/register",
-        element: <PrivateRoutes>
-          <Register/>
-        </PrivateRoutes>,
+        element: (
+          <PrivateRoutes>
+            <Register />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/register/employer",
-        element: <PrivateRoutes>
-          <CandidateRegister/>
-        </PrivateRoutes>,
+        element: (
+          <PrivateRoutes>
+            <CandidateRegister />
+          </PrivateRoutes>
+        ),
       },
     ],
   },
