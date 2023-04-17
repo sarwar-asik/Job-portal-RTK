@@ -18,10 +18,9 @@ const MyJobs = () => {
   //   .then(res=>res.json()).then(data=>console.log(data))
   // },[])
 
+  console.table("from useGetQuery", data, "my jobs");
 
   
-
-  console.table("from useGetQuery", data, "my jobs");
   
   const applyJobs = (data) => {
     const stringData = JSON.stringify(data)
