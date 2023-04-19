@@ -20,27 +20,27 @@ const MyJobs = () => {
 
   console.table("from useGetQuery", data, "my jobs");
 
-  
-  
   const applyJobs = (data) => {
-    const stringData = JSON.stringify(data)
+    const stringData = JSON.stringify(data);
     Swal.fire(` Coppied `);
-    navigator.clipboard.writeText(stringData)
-
+    navigator.clipboard.writeText(stringData);
   };
 
   if (data.length < 1) {
-    return (
-     <Loader/>
-    );
+    return <Loader />;
   }
 
   return (
     <div className="relative mt-16 lg:mt-0">
-      <h2 className="text-3xl font-bold font-serif  my-3 text-center">
-        Your Job {data.length}
+      <h2 className="text-3xl font-bold text-[#1f5591] font-serif  my-3 text-center">
+        {/* Our Job {data.length} */}
+        Recent Job ,
       </h2>
-      <section className="grid grid-cols-1 gap-3 sticky  max-h-[100vh] overflow-auto ">
+      <p className="text-center font-serif font-[500] ">
+        Here are Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+        Praesentium, et.
+      </p>
+      <section className="grid grid-cols-1 gap-3 sticky  max-h-[100vh] overflow-auto mt-5 ">
         {data.map((item) => {
           const { _id, name, salary, skills, position, overView } = item;
           return (
